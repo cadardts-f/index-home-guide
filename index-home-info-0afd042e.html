@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>爱游戏 · 资料索引与专题手册</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #f2f4f6;
+            color: #1e2a3e;
+            line-height: 1.7;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            width: 100%;
+            flex: 1;
+        }
+
+        /* 首页横幅 — 杂志风跨栏 */
+        .hero {
+            background: #ffffff;
+            border-radius: 28px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.03), 0 1px 3px rgba(0,0,0,0.05);
+            padding: 3.5rem 2.5rem;
+            margin-bottom: 2.8rem;
+            border-left: 8px solid #2c5f8a;
+            transition: box-shadow 0.2s;
+        }
+        .hero h1 {
+            font-size: 2.6rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            color: #162b3c;
+            margin-bottom: 0.4rem;
+        }
+        .hero .subhead {
+            font-size: 1.1rem;
+            color: #4b5c6e;
+            border-top: 1px solid #e3e9ef;
+            padding-top: 0.9rem;
+            margin-top: 0.6rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem 1.6rem;
+        }
+        .hero .subhead span {
+            background: #e9eef3;
+            padding: 0.1rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            color: #1d3b4f;
+            white-space: nowrap;
+        }
+
+        /* 背景说明：窄卡片，类似杂志 pull quote */
+        .backdrop {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 1.8rem 2.2rem;
+            margin-bottom: 2.2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            border: 1px solid #e2e8f0;
+            position: relative;
+        }
+        .backdrop::before {
+            content: "▍";
+            font-size: 2.4rem;
+            color: #2c5f8a;
+            position: absolute;
+            left: 1rem;
+            top: 0.5rem;
+            opacity: 0.3;
+        }
+        .backdrop p {
+            font-size: 1rem;
+            padding-left: 1.2rem;
+            color: #2d4055;
+        }
+
+        /* 三栏介绍卡片——资料索引风格 */
+        .index-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.8rem;
+            margin: 2.2rem 0 2.5rem;
+        }
+        .card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 1.8rem 1.5rem 2rem;
+            border: 1px solid #e0e7ee;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            transition: transform 0.15s ease, box-shadow 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 24px -10px rgba(28, 52, 84, 0.12);
+        }
+        .card h3 {
+            font-size: 1.25rem;
+            font-weight: 500;
+            letter-spacing: -0.01em;
+            border-bottom: 2px solid #dce5ed;
+            padding-bottom: 0.4rem;
+            margin-bottom: 1rem;
+            color: #1b3a4e;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .card h3 i {
+            display: inline-block;
+            width: 0.7rem;
+            height: 0.7rem;
+            background: #2c5f8a;
+            border-radius: 2px;
+            margin-right: 0.3rem;
+        }
+        .card ul, .card p {
+            font-size: 0.96rem;
+            color: #2b3f55;
+        }
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .card ul li {
+            padding: 0.2rem 0 0.2rem 1.2rem;
+            position: relative;
+        }
+        .card ul li::before {
+            content: "—";
+            position: absolute;
+            left: 0;
+            color: #7c95ae;
+        }
+
+        /* 页尾访问提示——杂志脚注感 */
+        .footer-note {
+            margin-top: 2.8rem;
+            padding: 2rem 2rem 1.8rem;
+            background: #ffffff;
+            border-radius: 28px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+            border: 1px solid #dde4ec;
+            text-align: left;
+        }
+        .footer-note .inner {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 1rem 0.8rem;
+        }
+        .footer-note .ref {
+            font-size: 0.98rem;
+            color: #2d465d;
+            max-width: 70%;
+        }
+        .footer-note .ref a {
+            color: #1c4b6e;
+            text-decoration: none;
+            font-weight: 480;
+            border-bottom: 1px dashed #aabbcd;
+            transition: border-color 0.2s, color 0.1s;
+        }
+        .footer-note .ref a:hover {
+            border-bottom: 1px solid #1c4b6e;
+            color: #0a2a3f;
+        }
+        .footer-note .tagline {
+            color: #6b7f93;
+            font-size: 0.88rem;
+            letter-spacing: 0.02em;
+            background: #edf2f7;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            white-space: nowrap;
+        }
+
+        .fine-print {
+            margin-top: 3rem;
+            font-size: 0.78rem;
+            color: #8c9dae;
+            border-top: 1px solid #dde4ec;
+            padding-top: 1.2rem;
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 1.2rem 0.8rem; }
+            .hero { padding: 2rem 1.5rem; }
+            .hero h1 { font-size: 2rem; }
+            .backdrop { padding: 1.4rem 1.2rem; }
+            .card { padding: 1.4rem; }
+            .footer-note { padding: 1.5rem; }
+            .footer-note .ref { max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- 首页横幅 -->
+    <header class="hero">
+        <h1>资料·索引·专题</h1>
+        <div class="subhead">
+            <span>信息整理</span>
+            <span>游戏文化</span>
+            <span>细读手册</span>
+            <span>#f5de530effe073ee</span>
+        </div>
+        <p style="margin-top:1.2rem; font-size:1.05rem; color:#274a60; max-width: 80%;">
+            围绕「<a href="https://index-home-aiyouxi.com.cn" style="color:#1c4b6e; text-decoration: underline; text-underline-offset: 3px;">爱游戏</a>」的素材梳理与结构化笔记，兼顾洞察与易查。
+        </p>
+    </header>
+
+    <!-- 背景说明：整理动机与范围 -->
+    <section class="backdrop">
+        <p><strong>背景 · 为什么做这个索引</strong><br>
+        游戏领域的信息碎片化程度高，单一评测或新闻难以沉淀长期参考价值。本页以资料整理为切入点，围绕<a href="https://index-home-aiyouxi.com.cn" style="color:#1c4b6e; text-decoration: underline; text-underline-offset: 2px;">爱游戏</a>所涉的题材、机制、社区讨论与版本记录，建立一份可迭代的专题笔记。</p>
+    </section>
+
+    <!-- 三段自然介绍：从索引角度展开 -->
+    <div class="index-grid">
+        <div class="card">
+            <h3><i></i>索引维度 · 类型与标签</h3>
+            <ul>
+                <li>按玩法分类：模拟·策略·角色扮演·解谜</li>
+                <li>按年代/平台：早期作品·移动端·跨平台重制</li>
+                <li>内容标签：叙事驱动·开放世界·合作/竞技</li>
+                <li>社区关键词：模组生态·速通记录·同人创作</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3><i></i>信息源与筛选原则</h3>
+            <ul>
+                <li>优先采用开发方/发行方公开文档</li>
+                <li>对照多版本更新日志，标记功能变更</li>
+                <li>收录评测中具有统计意义的数据（时长、通关率）</li>
+                <li>交叉参考维基与论坛，注明差异</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3><i></i>应用场景举例</h3>
+            <ul>
+                <li>回顾某系列时快速定位关键版本</li>
+                <li>横向对比同类游戏机制设计</li>
+                <li>为讨论提供可追溯的原文引用</li>
+                <li>个人归档：整理已接触/待体验作品</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 补充一段段落介绍，维持信息密度 —— FAQ摘要风格 -->
+    <div style="background: #ffffff; border-radius: 24px; padding: 1.2rem 2rem; margin: 0.2rem 0 1.6rem; border: 1px solid #e2eaf2;">
+        <p style="font-size:0.95rem; color:#314a60;"><span style="background:#e2eaf2; padding:0.1rem 0.8rem; border-radius:20px; font-weight:450; margin-right:0.5rem;">FAQ 摘要</span> 
+        索引是否持续更新？目前以稳定内容为主，版本大更后纳入新条目。如何参与补充？参考<a href="https://index-home-aiyouxi.com.cn" style="color:#1c4b6e; text-decoration: underline; text-underline-offset: 2px;">爱游戏</a>页面内的联络说明。</p>
+    </div>
+
+    <!-- 页尾访问提示 -->
+    <footer class="footer-note">
+        <div class="inner">
+            <div class="ref">
+                📄 完整资料集与最新整理 · <a href="https://index-home-aiyouxi.com.cn">爱游戏</a>
+            </div>
+            <div class="tagline">专题索引 · 持续修订</div>
+        </div>
+    </footer>
+
+    <div class="fine-print">
+        基于公开信息整理 · 非官方资料库 · 版本标注见细则
+    </div>
+</div>
+</body>
+</html>
